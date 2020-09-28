@@ -29,6 +29,7 @@ def main():
     """
     Driver method for the EtlWorldBankData app
     """
+
     # Get ISO country code data
     iso_country_code_df: pd.DataFrame = get_iso_country_code_df()
     print(f"Dimensions of iso_country_code_df: {iso_country_code_df.shape}")

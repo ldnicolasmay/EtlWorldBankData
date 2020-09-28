@@ -76,9 +76,14 @@ def expand_df_dict_values(
     :return: pandas DataFrame with expanded columns on the left
     """
     expanded_df = df.copy(deep=True)
+    print(df.head(2))
 
     for col in cols_to_expand:
-        expanded_df = pd.concat([expanded_df[col].apply(pd.Series), expanded_df.drop(columns=[col])], axis="columns")
+        expanded_df = pd.concat(
+            [expanded_df[col].apply(pd.Series), expanded_df.drop(columns=[col])],
+            axis="columns"
+        )
+    print(expanded_df.head(2))
 
     return expanded_df
 
@@ -128,7 +133,7 @@ def get_worldbank_indicator_dfs_dict(
         }
 
     countries: str = "all"
-    min_year: int = 2012  # First year of OONI
+    min_year: int = 2014  # First year of good OONI data
     max_year: int = datetime.date.today().year
     worldbank_api_url_stub: str = f"https://api.worldbank.org/v2/country/{countries}/indicator"
     worldbank_record_api_params: Dict[str, str] = {"date": f"{min_year}:{max_year}", "format": "json"}
